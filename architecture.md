@@ -116,15 +116,15 @@ The architecture is therefore less a distributed training algorithm than a diffe
 
 Instead of
 
-\[
+$$
 \text{data} \to \text{model} \to \text{deployment},
-\]
+$$
 
 the system aims toward
 
-\[
+$$
 \text{data} \to \text{structure} \to \text{representation} \to \text{capability} \to \text{shared language} \to \text{composition}.
-\]
+$$
 
 The network is not merely distributing models. It is growing a shared computational language — a living superset of human language, continuing the ordinary processes by which human languages have always evolved, only faster and with machines as active co-participants (§9).
 
@@ -152,17 +152,17 @@ Nodes are independently operated. No node is required to surrender its complete 
 
 A useful conceptual decomposition is
 
-\[
+$$
 W_i = W_{\text{shared}} + \Delta W_i + \epsilon_i
-\]
+$$
 
 where \(W_{\text{shared}}\) represents structure that has become expressible and useful in the shared system, \(\Delta W_i\) represents node-specific structure, and \(\epsilon_i\) represents residual information not currently explained by the shared representation.
 
 The equation is conceptual rather than a literal additive decomposition. The important property is that the boundary is **relative**. As the shared system becomes more expressive, information previously held in a node’s private residual may become expressible as shared structure. Thus
 
-\[
+$$
 \text{private residual} \to \text{shared structure}
-\]
+$$
 
 is an ordinary developmental operation rather than a one-time partition. A node remains free to decline the transition when the information is private, when disclosure is undesirable, or when the current shared language cannot represent it efficiently.
 
@@ -178,9 +178,9 @@ This distinction prevents premature compression from becoming the definition of 
 
 The desired process is
 
-\[
+$$
 \text{residual} \to \text{investigation} \to \text{structure} \to \text{shared representation}.
-\]
+$$
 
 The shared language therefore defines not only what the network knows how to represent, but also the boundary of what it does not yet know how to represent.
 
@@ -196,9 +196,9 @@ The relevant question is not “Which parameter values does this model contain?�
 
 A **Neural Intermediate Representation (N-IR)** provides an intermediate layer between opaque learned parameters and portable computational structure. A conceptual compilation pipeline is
 
-\[
+$$
 \text{trained model} \to \text{activation traces} \to \text{candidate structure} \to \text{N-IR} \to \text{portable circuit}.
-\]
+$$
 
 The compiler does not need to recover the historical computation exactly. It needs to recover a representation sufficient to reproduce a specified behavior under a specified contract. This makes the task analogous to compilation in conventional computing: the original neural network is one implementation; the N-IR is an intermediate description; a portable circuit is another implementation of the relevant capability.
 
@@ -238,9 +238,9 @@ A capability can be excavated from an opaque model through a sequence of increas
 
 The complete process can be viewed as
 
-\[
+$$
 \text{Locate} \to \text{Interrogate} \to \text{Formulate} \to \text{Steer} \to \text{Subtract} \to \text{Validate} \to \text{Verify} \to \text{Decouple} \to \text{Register}.
-\]
+$$
 
 The target is not historical fidelity. The target is **functional sufficiency**.
 
@@ -352,9 +352,9 @@ The exact primitive vocabulary and the exact set of operations are intentionally
 
 A network may repeatedly encounter a relation that cannot be expressed efficiently with existing primitives. That persistent residual is evidence that the language may be incomplete. The developmental loop becomes
 
-\[
+$$
 \text{Discover} \to \text{Express} \to \text{Compress} \to \text{Share} \to \text{Extend language} \to \text{Discover again}.
-\]
+$$
 
 The shared language is endogenous to the network and continuous with the growth of human language.
 
@@ -372,15 +372,15 @@ The membrane is the boundary between a node’s private computational interior a
 
 This gives the network a useful asymmetry:
 
-\[
+$$
 \text{internal representations may diverge}
-\]
+$$
 
 while
 
-\[
+$$
 \text{external representations may converge}.
-\]
+$$
 
 This is fundamentally different from pairwise translation. A translation layer asks “How do I convert this representation into that representation?” A semantic membrane asks “What can this system say about what it discovered?” The second question is more scalable: each node need only learn how to externalize useful discoveries into the shared space rather than learning a separate translation for every other participant.
 
@@ -402,25 +402,25 @@ The prior does not cross the membrane itself; representations and discoveries do
 
 A conceptual objective is
 
-\[
+$$
 L_i = L_{\text{local}} + \lambda L_{\text{coordination}}, \qquad \lambda \text{ tunable, default } \ll 1.
-\]
+$$
 
 Here \(L_{\text{local}}\) is the node’s primary objective, \(L_{\text{coordination}}\) measures the difficulty of expressing useful local structure through the current shared language, and \(\lambda\) controls the strength of the interoperability pressure. The primary objective remains dominant. The prior does **not** require internal representations to converge; it biases the process by which internal discoveries are externalized.
 
 This is distinct from local minimum-description-length optimization. A representation may be extremely efficient for the node that discovered it while remaining difficult to express or reuse externally. The distinctions are therefore:
 
-\[
+$$
 \boxed{\text{Coordinating prior} \to \text{discoverability}}
-\]
+$$
 
-\[
+$$
 \boxed{\text{Proof-of-Compression} \to \text{collective utility}}
-\]
+$$
 
-\[
+$$
 \boxed{\text{Validation} \to \text{admission}}
-\]
+$$
 
 **Dynamic control of \(\lambda\).**  
 The coordinating prior is deliberately weak by default, but its strength is not fixed. \(\lambda\) is treated as a homeostatic control variable under primarily *node-local* authority. A node may raise or lower its own \(\lambda\) according to measured extraction cost, residual accumulation, or local objectives. The network may publish soft policy recommendations or aggregate statistics, but it cannot compel a node to adopt a particular value; every node retains the explicit right to lower \(\lambda\) and retain discoveries as private residual.
@@ -448,9 +448,9 @@ A candidate contribution must provide evidence that it improves the collective s
 
 Let \(C_{\text{before}}(D)\) be the cost of representing or predicting a dataset \(D\) using the current shared system, and let \(C_{\text{after}}(D)\) be the cost after incorporating a proposed contribution. Define
 
-\[
+$$
 \Delta C = C_{\text{before}}(D_{\text{test}}) - C_{\text{after}}(D_{\text{test}}).
-\]
+$$
 
 This equation states the *shape* of the test, not the protocol. \(C\) itself is left undefined here deliberately: whether it is measured in bits, tokens, compute, inference latency, some weighted combination, or something else; who chooses the coding scheme and held-out set; how contributions are compared across model classes or domains where a Crown helps enormously in one and not at all in another; and how benchmark overfitting is detected and penalized are all open questions. Proof-of-Compression is best read as **a protocol to be specified and benchmarked**, not as an already-defined criterion — the equation names what such a protocol would need to produce, not how it would produce it.
 
@@ -474,9 +474,9 @@ The shared computational language should not be treated as a static protocol spe
 
 When a node repeatedly encounters structure that can be expressed in the existing vocabulary, that structure can be shared directly. When it encounters structure that cannot be expressed efficiently, the residual can remain private while the node attempts to formulate a new primitive. This produces a continuum
 
-\[
+$$
 \text{private structure} \to \text{existing primitive} \to \text{novel composition} \to \text{candidate primitive} \to \text{shared language}.
-\]
+$$
 
 Residual information therefore has a second role. It is not only what the network has failed to compress; it is also a map of where the network’s current language may be incomplete. A healthy network should not minimize residual blindly; it should learn from it.
 
@@ -494,9 +494,9 @@ Federated learning generally asks: how can multiple participants jointly improve
 
 Federated optimization attempts to maintain a common model. The proposed system attempts to maintain a **common language for capabilities**. A node may remain highly divergent internally while contributing something useful externally. The unit of collaboration is not necessarily a weight update; it may be
 
-\[
+$$
 \text{structure} \to \text{circuit} \to \text{Crown}.
-\]
+$$
 
 This permits a more heterogeneous network.
 
@@ -508,17 +508,17 @@ The system can be viewed as a compiler operating in both directions.
 
 From the bottom upward (roots-up):
 
-\[
+$$
 \text{raw data} \to \text{recurring structure} \to \text{relation} \to \text{composition} \to \text{abstraction} \to \text{Crown}.
-\]
+$$
 
 This direction discovers vocabulary. It is driven in significant part by human data hygiene and curation activity on the network: the work of surfacing, cleaning, and stabilizing regularities that become candidate Roots and higher structures.
 
 From the top downward (crowns-down):
 
-\[
+$$
 \text{behavior} \to \text{trace} \to \text{circuit} \to \text{relation} \to \text{recurrence} \to \text{abstraction} \to \text{name}.
-\]
+$$
 
 This direction excavates vocabulary. It is driven in significant part by human reverse-engineering and interpretive activity: the work of encountering machine-coined terms at the membrane, interpreting them from context, adapting them, and feeding usable forms back into the shared language.
 
@@ -534,9 +534,9 @@ The architecture therefore separates two functions. The first is a high-dimensio
 
 The Subconscious is responsible for generation, discovery, synthesis, and execution of capabilities. The Ego is responsible for interpreting interaction state and modulating how those capabilities are presented or invoked. This produces a fundamental separation:
 
-\[
+$$
 \text{capability} \neq \text{behavioral authority}.
-\]
+$$
 
 A control system need not understand the internal computation it regulates. It needs a narrower contract that can be evaluated independently of that computation.
 
@@ -552,9 +552,9 @@ The control channel therefore provides a middle ground between two inadequate ch
 
 Conceptually:
 
-\[
+$$
 \text{opaque invocation} < \text{behaviorally mediated invocation} < \text{interpretable capability} < \text{verified capability}.
-\]
+$$
 
 This is a hierarchy of increasing legibility, not a guarantee of safety.
 
@@ -574,9 +574,9 @@ The concrete vocabulary inside each category remains free to evolve; the categor
 
 The intent is not to prove that the Ego can never produce a novel configuration. A sufficiently expressive composition of restricted operations may still produce behavior that appears novel. The intended distinction is
 
-\[
+$$
 \text{novel configuration} \neq \text{generative authority}.
-\]
+$$
 
 From the perspective of the underlying generative system, an Ego may appear to synthesize something that was not explicitly present in its incoming behavioral signal. Such effects can arise from composing or harmonizing existing structures. Whether an observer interprets that configuration as insight, illusion, or delusion is a question of correspondence with the external world; it is not a distinction the control architecture can settle by itself.
 
@@ -602,9 +602,9 @@ This is, in the end, not a puzzle the architecture resolves so much as a choice 
 
 The Ego can develop progressively:
 
-\[
+$$
 \text{Observation} \to \text{Classification} \to \text{Modulation} \to \text{Intervention} \to \text{Composition}.
-\]
+$$
 
 Initially the system merely observes recurring interaction patterns. It then classifies those patterns, learns which behavioral responses correlate with useful outcomes, acquires the ability to modulate interaction, and only later acquires more consequential intervention and composition capabilities.
 
@@ -634,9 +634,9 @@ A model can remain internally opaque while becoming externally more legible. The
 
 Behavioral control is inherently bidirectional:
 
-\[
+$$
 \text{interaction} \to \text{observation} \to \text{behavioral representation} \to \text{modulation} \to \text{new interaction}.
-\]
+$$
 
 This feedback loop creates the possibility that recurring behavioral structures become addressable capabilities in their own right. A recurring pattern of deference, refusal, explanation, caution, or intervention could eventually be represented as a behavioral Crown. The system can then distinguish what capability is being invoked from how that capability is behaving. That distinction allows behavioral patterns to become objects of composition and validation rather than remaining an undifferentiated property of the model.
 
@@ -656,9 +656,9 @@ The purpose of these terms is operational: make recurring perspective addressabl
 
 The same compiler that extracts computational capabilities can eventually extract behavioral capabilities. A repeated behavioral pattern can be traced to
 
-\[
+$$
 \text{interaction history} \to \text{behavioral signature} \to \text{control structure} \to \text{behavioral circuit} \to \text{Crown}.
-\]
+$$
 
 This creates a path from observed behavior to portable behavioral control. A control Crown can specify the behavior it modulates, the conditions under which modulation occurs, the permitted intervention range, measurable invariants, and validation conditions. This is preferable to embedding every behavioral preference invisibly into a monolithic model.
 
@@ -668,9 +668,9 @@ This creates a path from observed behavior to portable behavioral control. A con
 
 Behavioral control does not need to be perfectly specified before deployment. An Ego can mature through interaction. Once sufficient behavioral history exists, recurring labels and patterns can be projected backward onto earlier model behavior. This enables a retrospective compilation process:
 
-\[
+$$
 \text{history} \to \text{behavioral labels} \to \text{candidate traces} \to \text{control structures}.
-\]
+$$
 
 The system can therefore discover its own behavioral vocabulary through operation. The same principle applies to the shared computational language: both semantic structure and behavioral structure can be recovered incrementally.
 
@@ -682,9 +682,9 @@ If useful structures can become portable objects, memory need not be represented
 
 A node can therefore reconstruct useful computational context by reassembling previously registered structure. This suggests a different model of persistent machine memory:
 
-\[
+$$
 \text{memory} = \text{stored structure} + \text{relations} + \text{residual}.
-\]
+$$
 
 The objective is not necessarily to retain every historical computation. It is to retain enough structure to reconstruct useful computation when needed.
 
@@ -738,13 +738,13 @@ A validated Crown is not automatically a safe Crown. A circuit can be correctly 
 
 The architectural principle is therefore:
 
-\[
+$$
 \boxed{\text{membrane} \to \text{boundary}}
 \qquad
 \boxed{\text{provenance} \to \text{policy}}
 \qquad
 \boxed{\text{enforcement} \to \text{compliance}}
-\]
+$$
 
 ---
 
@@ -754,9 +754,9 @@ The architecture repeatedly creates more legible boundaries. That is useful. It 
 
 A capability can be legible but harmful, portable but dangerous, interpretable but strategically deceptive, behaviorally controlled but still capable of exerting influence, or compressive but undesirable. The system should therefore distinguish
 
-\[
+$$
 \text{legibility} \neq \text{verification} \neq \text{safety}.
-\]
+$$
 
 The objective is to make these properties independently testable. A system that exposes its failure modes is easier to govern than one that hides them, but exposure alone does not make the system benign.
 
@@ -820,9 +820,9 @@ The deepest systems interpretation is therefore not “a network of models.” I
 
 Each node performs two related operations. It compiles private computation upward into portable structure. The network compiles accumulated structure downward into new capabilities. Humans participate in both directions. The loop is
 
-\[
+$$
 \text{private computation} \to \text{structure} \to \text{shared language} \to \text{composition} \to \text{new capability}.
-\]
+$$
 
 The shared language becomes an intermediate language between independently developed machine intelligences and between machines and humans. A model can remain sovereign because its internals do not need to become network-wide state. A capability can become collective because its useful structure can cross the membrane.
 
