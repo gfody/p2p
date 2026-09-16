@@ -840,7 +840,7 @@ A young ego, trained across a wide distribution that still includes slow and adv
 
 A human owner of a rare residual decides the current network density is no longer compatible with the terms under which that residual was originally contributed. Recollection is invoked. The dependent crowns elsewhere thin but do not break; the system had been required to keep the dependency graph honest. The residual goes dormant under its owner's policy. Later, under different conditions, it may return. The right to leave remains real.
 
-•••
+$$•••$$
 
 None of this is a finished solution. It is the shape of a requirement that can be iterated on the same way crowns are iterated: locate the failure mode, formulate a contract or a gate, subtract the unaccounted risk, validate under adversarial pressure, register the result, and keep the residual of what still cannot be governed visible rather than papered over.
 
