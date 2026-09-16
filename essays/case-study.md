@@ -1,4 +1,4 @@
-**Case Study: Digital Ad Intelligence and the Roots Network**
+# Roots Network: Case Study
 
 ### Company profile
 
