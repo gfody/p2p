@@ -1,4 +1,4 @@
-**The Roots Network**
+# The Roots Network
 
 ### 1. The problem it solves
 

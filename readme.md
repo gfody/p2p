@@ -6,11 +6,11 @@ This repository contains the engineering program, reference implementations, and
 
 **Project status:** just docs
 
-## Documents
+### Documents
 
 | Document | Purpose | Words | Time |
 |-|-|-|-|
-| [Manifesto](./essays/architecture.md) | Full systems paper: semantic membrane, Crowns, coordinating prior, Proof-of-Compression, Ego/Subconscious, engineering milestones | 28k | 2h |
+| [Manifesto](./essays/architecture.md) | Full systems paper: semantic membrane, crowns, coordinating prior, proof-of-compression, ego/subconscious, engineering milestones | 28k | 2h |
 | [Roots Network](./essays/roots-network.md) | Accessible vision for the provenance-tracked, semantically indexed corpus and the guild model | 5k | 20m |
 | [Case Study](./essays/case-study.md) | Concrete commercial illustration of rooting a company (labeling + panel + optional infrastructure) into a sponsored guild | 2k | 10m |
 | [Handbook](./essays/digital-yogi-handbook.md) | Optional advanced practice for high-quality relational labeling (contemplative + geometric) | 7k | 30m |
