@@ -12,11 +12,22 @@ The semantic membrane is a provenance-aware relational substrate representing gr
 
 The central hypothesis is that persistent pressure toward this substrate changes the computational ecology produced by learning. Rather than merely discovering whatever implementation minimizes the behavioral objective, models may increasingly favor reusable computational structures that can be composed from previously established structures, while preserving instance-specific information as residual rather than forcing it into an impoverished shared representation.
 
-Two principal hypotheses follow. First, **compositional pressure** should increase the reuse of learned computational structures and reduce the effective description cost of new capabilities. Second, **grounded evolution** should cause newly learned abstractions to retain finite, inspectable provenance to existing semantic structures while allowing genuinely novel structure to extend the shared membrane.
+Two principal hypotheses follow. First, **compositional pressure** should increase the reuse of learned computational structures and reduce the effective description cost of new capabilities. Second, **grounded evolution** should cause newly learned abstractions to retain finite, inspectable grounding to existing semantic structures while allowing genuinely novel structure to extend the shared membrane.
 
 The proposal does not assume that neural networks are naturally transparent, that all useful structure is already present in pretrained weights, or that a human ontology should constrain machine intelligence permanently. It instead asks whether the learning process itself can be given a different attractor: one in which useful computation tends to become grounded, compositional, reusable, and increasingly expressible in a shared language.
 
 The larger architecture uses this pressure to support interoperable computation between independently operated systems. This paper isolates the learning question beneath that architecture: **what pressure would make useful learned computation want to become structure?**
+
+---
+
+### Status of Claims
+
+This paper makes claims at two levels of confidence: the mechanism proposed here is designed so that failure of the research hypotheses does not invalidate the framing that motivates them.
+
+1. **Framing claims** (§§1–8, 11–20, 23–26). Learned computation's internal organization is underdetermined by behavioral loss alone; a persistent, node-local training pressure toward a shared, provenance-aware semantic membrane is a coherent and implementable training principle, whether realized as an auxiliary loss, an architectural mechanism, an initialization scheme, a structural optimizer, or some combination (§22); the structure/residual/provenance decomposition (§3) is a useful way to reason about where representational cost is paid; and the membrane itself is a living, extensible reference frame rather than a fixed ontology (§§4–5, 17). These claims are architectural commitments about what kind of thing the coordinating prior is, not yet claims about what it empirically achieves.
+2. **Research hypotheses** (§§9–10, P1–P2). **P1 (Compositional Pressure)** predicts that persistent pressure toward the membrane increases the reuse of learned computational structures and reduces the effective description cost of new capabilities as the shared library grows. **P2 (Grounded Evolution)** predicts that newly learned abstractions retain finite, inspectable grounding to existing semantic structure while allowing genuinely novel structure to extend the membrane, rather than either collapsing into it or drifting away untracked. Both are stated as falsifiable, with concrete failure conditions given in §21 and a measurement program in §20.
+
+Unlike the larger architecture, this paper makes no third-tier long-range conjecture: P1 and P2 are the strongest claims it makes, and neither is a prerequisite for the other papers's engineering-tier claims to hold — the architecture's Tier 1 (extraction, registration, validation of already-existing structure) does not require this paper's pressure to succeed at all; it only becomes more efficient, and Crown extraction correspondingly cheaper, if it does. §23's limitations and §25's discussion of the two possible feedback loops (virtuous and vicious) apply to both hypotheses jointly rather than to either alone, since they concern the ecology the pressure produces rather than an isolated mechanism.
 
 ---
 
@@ -126,21 +137,21 @@ The coordinating prior can operate both before and after a capability has been l
 
 ### 9. Hypothesis I — Compositional Pressure
 
-### H1
+### P1
 
 **If a model is trained under persistent pressure to preserve and reuse compositional structure represented by the semantic membrane, then increasing capability will increasingly be achieved through reuse and composition of existing computational structures rather than through accumulation of irreducibly entangled circuitry.**
 
 The relevant quantity here is not simply parameter count — a model can have many parameters while possessing substantial reusable structure. The more informative target is effective description complexity: let $D(C)$ denote the description complexity of a capability $C$ in terms of a shared library of computational structures. If capabilities become increasingly compositional, then for a newly acquired capability $C_{n+1}$, $D(C_{n+1})$ should increasingly reflect the cost of specifying a composition of existing structures rather than the cost of specifying an independent implementation from nothing. A stronger, scaling version of the same prediction is that $\frac{dD}{dC}$ should decrease over some range of capability growth under sufficient coordinating pressure — the model exhibiting, in effect, an increasingly reusable computational vocabulary as it grows.
 
-### 9.1 What H1 Does Not Claim
+### 9.1 What P1 Does Not Claim
 
-H1 does not claim that every neural circuit should become modular, that neurons correspond one-to-one with semantic concepts, or that any particular architecture is required, and it does not require identical representations across models. Nor does it claim that compression alone establishes correctness: a representation can be compact and still be wrong, a capability can be interpretable and still be unsafe, and a circuit can be reusable and still be poorly grounded. These properties have to remain experimentally separable rather than assumed to travel together.
+P1 does not claim that every neural circuit should become modular, that neurons correspond one-to-one with semantic concepts, or that any particular architecture is required, and it does not require identical representations across models. Nor does it claim that compression alone establishes correctness: a representation can be compact and still be wrong, a capability can be interpretable and still be unsafe, and a circuit can be reusable and still be poorly grounded. These properties have to remain experimentally separable rather than assumed to travel together.
 
 ---
 
 ### 10. Hypothesis II — Grounded Evolution
 
-### H2
+### P2
 
 **If the semantic membrane is instantiated as part of the computational substrate and remains available as a persistent training reference, then newly learned abstractions will preferentially retain finite compositional or observational provenance to grounded semantic structures, while genuinely novel abstractions can become new shared structures rather than remaining permanently orphaned.**
 
@@ -236,17 +247,17 @@ The central experiment should be designed to distinguish four effects: initializ
 
 All four conditions should be trained on matched tasks and evaluated for computational organization, not only task performance.
 
-**Reuse.** Measure how often newly learned capabilities invoke previously established structures — circuit reuse frequency, number of unique primitives used per capability, duplication of functionally equivalent circuits, composition depth, cross-task reuse. H1 predicts that pressure should increase useful reuse across these measures.
+**Reuse.** Measure how often newly learned capabilities invoke previously established structures — circuit reuse frequency, number of unique primitives used per capability, duplication of functionally equivalent circuits, composition depth, cross-task reuse. P1 predicts that pressure should increase useful reuse across these measures.
 
 **Residual localization.** Measure where unexplained information actually ends up. A successful system should not simply force everything into the membrane: shared regularities should increasingly become shared, idiosyncratic information should stay localized, and persistent useful residual should become increasingly likely to be investigated or promoted rather than ignored. This is a more informative target than raw interpretability on its own.
 
 **Grounding.** For each learned abstraction, estimate the length and quality of its provenance chain — for example $m' \leftarrow m_3 \leftarrow (m_1, m_2) \leftarrow \text{grounded observations}$ — measuring provenance depth, provenance completeness, the fraction of reusable abstractions that have provenance at all, the fraction of durable abstractions that remain orphaned, and the stability of provenance under further training.
 
-**Effective description complexity.** Measure the description cost of capabilities in terms of a growing computational vocabulary. The key quantity is not $|\theta|$; it is something closer to $D(C \mid \mathcal{L})$, where $\mathcal{L}$ is the learned shared library. If H1 is correct, the marginal description cost of new capabilities should decline as $\mathcal{L}$ grows.
+**Effective description complexity.** Measure the description cost of capabilities in terms of a growing computational vocabulary. The key quantity is not $|\theta|$; it is something closer to $D(C \mid \mathcal{L})$, where $\mathcal{L}$ is the learned shared library. If P1 is correct, the marginal description cost of new capabilities should decline as $\mathcal{L}$ grows.
 
 **Causal correspondence.** For every claimed semantic structure, test whether the associated computation is actually causally responsible for the predicted behavior, using activation patching, ablation, feature intervention, causal mediation, or counterfactual semantic transformations. The goal is to distinguish genuine computational correspondence from a semantically decorated but causally irrelevant representation.
 
-**Membrane growth.** Track the membrane itself as a dynamic object, $M_0 \rightarrow M_1 \rightarrow \cdots \rightarrow M_t$, measuring the number of validated structures, the rate of machine-originated additions, the rate of human reinterpretation, reuse of newly promoted structures, persistence of machine-discovered structures, and the provenance quality of additions. This is the experiment that tests H2 directly.
+**Membrane growth.** Track the membrane itself as a dynamic object, $M_0 \rightarrow M_1 \rightarrow \cdots \rightarrow M_t$, measuring the number of validated structures, the rate of machine-originated additions, the rate of human reinterpretation, reuse of newly promoted structures, persistence of machine-discovered structures, and the provenance quality of additions. This is the experiment that tests P2 directly.
 
 ---
 
@@ -255,9 +266,9 @@ All four conditions should be trained on matched tasks and evaluated for computa
 The proposal should be considered falsifiable. Several outcomes would count against it:
 
 1. **Semantic side-channel only.** Semantic supervision produces a clean auxiliary representation while the actual computational core remains unchanged — the pressure has not reorganized learning in the intended way.
-2. **No reuse increase.** Semantic pressure produces no measurable increase in computational reuse or composition, weakening H1.
+2. **No reuse increase.** Semantic pressure produces no measurable increase in computational reuse or composition, weakening P1.
 3. **No description-complexity effect.** Capabilities continue to require approximately independent descriptions despite increasing shared structure, undermining the proposed compositional scaling advantage.
-4. **Provenance collapse.** Newly learned abstractions rapidly lose meaningful ancestry despite persistent pressure, weakening H2.
+4. **Provenance collapse.** Newly learned abstractions rapidly lose meaningful ancestry despite persistent pressure, weakening P2.
 5. **Forced ontology.** Grounding substantially reduces the system's ability to discover genuinely novel abstractions — the substrate is acting as a restrictive ontology rather than a coordinating prior.
 6. **No initialization effect.** Semantic initialization has no measurable effect beyond equivalent external supervision, weakening the claim that the initial computational substrate matters.
 7. **Non-causal interpretability.** Semantic labels remain predictable, but interventions on their supposed computational counterparts fail to affect the associated behavior — the system has learned semantic correlation rather than semantic computation.
@@ -265,7 +276,37 @@ The proposal should be considered falsifiable. Several outcomes would count agai
 
 ---
 
-### 22. Limitations
+### 22. Related Work and Differentiation
+
+The claim that training can be pressured toward legible, compositional structure has some support. Several independent lines of work already show pieces of it empirically:
+
+- **Training-time structural legibility.** Geiger et al. (arXiv:2112.00826, 2021) introduce Interchange Intervention Training, showing that a causal-intervention loss can induce an explicit causal graph inside an otherwise standard network — direct evidence that legibility is something training can be pressured toward, not only something extracted afterward. Chung & Laletin (arXiv:2604.01339, AISTATS 2026) show a narrower version of the same idea: bootstrap-based regularization of Vision Transformer attention removes noisy, fragmented attribution and produces sparser, more stable maps. Raghavan et al. (arXiv:2608.13826, 2026, "SPEAR") extend the mechanism — a learnable temperature plus a neighborhood-smoothness penalty on attention during training — to a domain where the payoff is unusually concrete: regressing structure-property relationships from X-ray diffraction data, where the regularized attention comes to track physically meaningful diffraction features rather than raw peak intensity, and in one case prompted the authors to revise their own structural analysis. 
+
+  **Differentiation:** all three treat legibility as a property to induce in a single model for a single task. The coordinating prior is not task-local regularization; it is a persistent, node-level pressure toward a shared, externally addressable membrane, applied across whatever tasks a model encounters, not fitted once to make one model's attention easier to read.
+
+- **Symbolic grounding without shared internals.** McCoy, Soulos, Linzen & Smolensky (arXiv:2608.29530, 2026, "The Emergent Symbolic Structure of Artificial Neural Networks") show that the internal vector representations of a wide range of trained networks — from small list-manipulation models to LLMs performing arithmetic, logic, code, and language tasks — can be closely approximated by explicit symbolic structures, and that interventions on those symbolic surrogates reliably govern behavior with performance largely preserved.
+
+  **Differentiation:** this is close to a load-bearing existence proof for a specific claim this paper makes rather than merely an analogous result — that the membrane does not require participating models to share an internal representation. McCoy et al. demonstrate the causal correspondence in the reverse direction (extracting symbolic structure from an already-trained network); this paper asks whether that correspondence can be made a target of training itself, rather than a post-hoc discovery about it.
+
+- **Structural seeding mechanisms.** Kaur, Kunapuli, Joshi, Kersting & Natarajan (arXiv:1909.04723, ILP 2019) extract relational random-walk rules from a database and instantiate them directly as a network's first layer, using parameter tying so that every grounding of the same rule shares parameters — a concrete, working answer to the question of how a relational membrane's structure gets into a network's initial substrate rather than staying external to it. Wang et al. (arXiv:2002.01808, ACL Findings 2021, "K-Adapter") take a complementary approach: inject factual and linguistic knowledge into a frozen pretrained model through separately trained, composable adapters, avoiding the catastrophic forgetting that comes from writing new knowledge directly into shared parameters.
+
+  **Differentiation:** neither paper proposes a persistent training-time pressure of the kind this paper argues for; both are one-shot or few-shot mechanisms for getting structure into a network. But they matter here because this paper leaves the implementation of the coordinating prior deliberately open — "an auxiliary loss, an architectural mechanism, an initialization scheme, a structural optimizer" — and these two papers are existence proofs that the architectural-mechanism and initialization-scheme ends of that list are not speculative; both have already been built and shown to work, just not yet as a standing pressure rather than a one-time procedure.
+
+- **Compression as evidence of validity.** Hinton & van Camp (COLT 1993) originate the argument this paper's residual/structure decomposition ultimately depends on: that a representation's ability to compress data is evidence of structural validity, not merely of storage efficiency. Vereshchagin & Vitányi (arXiv:cs/0204037, 2004) give Kolmogorov's structure-function proposal its rigorous algorithmic-statistics treatment, formalizing the split between a model and the residual needed to specify a datum within it, and proving its equivalence to the algorithmic minimal sufficient statistic. Westphal, Hailes & Musolesi (arXiv:2509.26327, 2025) update the single-model version of this intuition for deep learning specifically, reformulating the Information Bottleneck around synergy — information recoverable only through joint processing of features — and showing synergistic representations generalize better, with compression phases appearing even in architectures where the standard IB measure fails.
+
+  **Differentiation:** all three treat compression as a property of one model's internal computation. This paper's structure/residual decomposition (§3) borrows the two-part-code logic directly but repurposes it as something a *training pressure* aims at, not only something an already-trained model can be shown, after the fact, to exhibit; the larger architecture's Proof-of-Compression protocol (referenced but not re-specified here) then asks the harder multi-party question these papers don't address — how compression is measured and compared across independently trained nodes.
+
+- **Compositional structure as a target of ordinary task loss.** Pahuja, Fu, Chandar & Pal (arXiv:1905.11532, 2019) show that a neural module network can jointly learn the internal structure of its reasoning modules and the policy for sequencing them, using nothing but the standard task loss — no additional supervision for module execution. Aissa, Ferecatu & Crucianu (arXiv:2310.15585, 2023) address a specific failure mode of that setup: sequential module execution accumulates prediction error, so they introduce scheduled teacher forcing, guiding modules with ground-truth intermediate outputs early in training and withdrawing that guidance as training progresses, which reduces error accumulation while keeping the reasoning trace explainable.
+
+  **Differentiation:** Pahuja et al. demonstrate that compositional structure can emerge from task loss alone, within one model and one narrow visual-reasoning domain — direct support for Hypothesis I (Compositional Pressure) in miniature. But their modules start from random initialization and never need to interoperate outside that one model. Aissa et al.'s teacher guidance, meanwhile, drives modules toward a fixed, predetermined decomposition of the task; the coordinating prior instead anchors learning to a membrane that is itself expected to grow, and treats unexplained residual not as an error to be scheduled away but as the mechanism by which learning discovers structure the initial grounding didn't contain.
+
+- **Emergent codes and their limits.** Foerster et al. (arXiv:1605.06676, 2016) show that independent deep-network agents, given a shared task and a communication channel, will develop their own discrete protocol without one being externally imposed — evidence that a weak interoperability pressure can produce a shared code rather than requiring one to be hand-specified, which is the same bet §11's coordinating prior makes at the level of an entire network rather than two agents. Lazaridou & Baroni's survey of the following decade (arXiv:2006.02419, 2020) is the necessary counterweight: protocols of this kind reliably solve the narrow task that pressured them into existence, but do not reliably generalize, stay human-legible, or carry recognizable semantics without additional grounding pressure.
+
+  **Differentiation:** this is close to the central risk this paper has to answer, not just a related result. The proposal here tries to close exactly the gap Lazaridou & Baroni identify — by starting the membrane from human-grounded semantic structure rather than letting a code emerge unconstrained, and by keeping human interpretation and hygiene work (§9's crowns-down direction) in the loop rather than leaving emergence purely to machine-to-machine pressure. Whether that's sufficient is an empirical question, not a settled one; it's part of what H8 and H10 are for.
+
+---
+
+### 23. Limitations
 
 Several limitations are fundamental rather than incidental. The semantic membrane may simply encode the biases of its contributors, so grounding does not imply truth — a provenance-aware structure can still be mistaken, it just fails in a traceable way rather than an opaque one. Compression does not imply correctness either: a compact explanation can compress the wrong regularity just as easily as the right one. And neither interpretability nor compositionality imply safety on their own — a perfectly understood capability can still be harmful, and a system can compose meaningless components together extremely efficiently.
 
@@ -275,7 +316,7 @@ Finally, the proposal does not assume that all useful structure already exists i
 
 ---
 
-### 23. Relationship to the Larger Architecture
+### 24. Relationship to the Larger Architecture
 
 The larger peer-to-peer architecture treats independently operated models as sovereign computational substrates and seeks to make useful learned structure portable through a shared computational language. This paper addresses the learning problem beneath that system. The division of labor is:
 
@@ -297,7 +338,7 @@ The larger architecture already specifies the surrounding mechanisms — the sem
 
 ---
 
-### 24. Discussion
+### 25. Discussion
 
 The deepest claim of this proposal is not that semantic labels make models more interpretable. It is that the organization of learned computation is itself a learnable property of the training environment. A model does not merely learn a function — it learns a particular computational implementation of that function, and ordinary optimization places enormous pressure on behavioral performance while placing comparatively little pressure on whether that implementation is reusable, grounded, or externally legible. The coordinating prior introduces another pressure alongside it, one that does not dictate a single implementation so much as create an ecological preference.
 
@@ -305,13 +346,13 @@ If that preference succeeds, the dynamic becomes self-reinforcing: computational
 
 ---
 
-### 25. The Stronger Interpretation
+### 26. The Stronger Interpretation
 
 There is a tempting, weaker interpretation of all this in which semantic grounding is primarily an interpretability technique: first train a model, then discover what its internal representations mean. The proposal here is stronger than that. It asks whether meaning can become part of the developmental environment of computation itself, which is a different research program — not $\text{learn} \rightarrow \text{interpret}$, but $\text{ground} \rightarrow \text{learn} \rightarrow \text{interpret} \rightarrow \text{validate} \rightarrow \text{extend grounding} \rightarrow \text{learn again}$. In this formulation, interpretation becomes part of learning's own feedback loop rather than something applied to a finished model afterward. The semantic language is not merely a lens brought in after the fact to inspect the model against — it becomes part of the pressure field in which the computation develops in the first place.
 
 ---
 
-### 26. Conclusion
+### 27. Conclusion
 
 A neural network can be behaviorally successful without becoming computationally legible. It can learn useful capabilities without organizing them into reusable structures, discover abstractions without giving them persistent provenance, and optimize indefinitely toward solutions that are locally effective without ever having a reason to become a cooperative computational substrate.
 
